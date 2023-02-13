@@ -8,7 +8,7 @@ class SinglyLinkedList{
 
     addToHead(data){
         const newHead = new Node(data);
-        if(this.head === null){
+        if(!this.head){
             this.head = newHead;
         } else {
             newHead.setNextNode(this.head);
@@ -17,14 +17,58 @@ class SinglyLinkedList{
     };
 
     removeHead(){
-        // if this.head === null there is nothing to remove.
         if(!this.head){
             return;
         };
-        // we store the head we gonna remove to return is data as the end of the method. we set the head to the next pointer of the removedHead.
+
         const removedHead = this.head;
         this.head = removedHead.getNextNode();
         return removedHead.data;
+    };
+
+    addToTail(data){
+        // same as addToHead logic if head = null newTail replace this.head
+        const newTail = new Node(data);
+        if(!this.head){
+            this.head = newTail;
+            return;
+        };
+
+        // look for the last node of the list to set is next pointer to the newTail variable
+        let current = this.head;
+        while(current.getNextNode()){
+            current = current.getNextNode();
+        };
+
+        current.setNextNode(newTail);
+    };
+
+    removeTail(){
+        // same as removeHead logic if head = null stop method
+        if(!this.head){
+            return;
+        };
+
+        let current = this.head;
+        // If the next pointer of head === null so Tail === Head we use the removeHead method                
+        if(!current.getNextNode()){
+            return this.removeHead();
+        }
+
+        let dataTail;
+        // Traverse the list recursively
+        while(current.getNextNode()){
+            // creation of the next variable who look at the next pointer of the current node.
+            let next = current.getNextNode();
+            // if the next pointer of the next variable is null. the next variable is the Tail node.
+            if(!next.getNextNode()){
+                // so we store is data, set the current node next pointer to null and return the data of the tail that will stop the while loop and the method.
+                dataTail = next.data;
+                current.setNextNode(null);
+                return dataTail;
+            }
+            current = next;
+        };
     }
 
     printList(){
@@ -46,22 +90,39 @@ class SinglyLinkedList{
     };
 };
 
+// Test zone
+
 const Farm = new SinglyLinkedList();
 
-const noHead = Farm.removeHead();
+const noTail = Farm.removeTail();
 
-console.log('the removed head is ' + noHead + ' head \n');
+console.log('Remove the Tail of ' + noTail + '\n')
+
+Farm.addToTail('mice');
+
+Farm.printList();
+console.log('\n');
+
+const miceTail = Farm.removeTail();
+
+console.log('Remove the Tail of ' + miceTail + '\n')
+
+Farm.printList();
+console.log('\n');
+
 
 Farm.addToHead('cow');
 
 Farm.addToHead('Farmer');
 
-Farm.addToHead('chicken')
+Farm.addToTail('cat');
 
 Farm.printList();
+console.log('\n');
 
-const fallingHead = Farm.removeHead();
+const catTail = Farm.removeTail();
 
-console.log('\nthe removed head is ' + fallingHead + ' head \n');
+console.log('Remove the Tail of ' + catTail + '\n')
 
 Farm.printList();
+console.log('\n');
