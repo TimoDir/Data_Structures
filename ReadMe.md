@@ -6,7 +6,7 @@ In this project, I will attempt to incorporate various data structures. For each
 
 ### 📁 Linear Data Structures
 
-- [ ] Nodes
+- [X] Nodes
 - [ ] Singly linked lists
 - [ ] Doubly linked lists
 - [ ] Queues

@@ -16,7 +16,7 @@ class Node{
     getNextNode(){
         return this.next;
     }
-    // same as the setNextNode methode but for the prev pointer
+
     setPrevNode(node){
         if(node instanceof Node || node === null){
             this.prev = node;
@@ -29,3 +29,5 @@ class Node{
         return this.prev;
     }
 };
+
+module.exports = Node;
