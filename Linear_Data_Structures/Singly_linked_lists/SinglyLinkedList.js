@@ -7,25 +7,43 @@ class SinglyLinkedList{
     }
 
     addToHead(data){
-        //Put the data inside a node instance
         const newHead = new Node(data);
-        //if there is no head to the list just add this newhead
         if(this.head === null){
             this.head = newHead;
         } else {
-        //else we set the next node of this new head to the current head and replace the head with this new head
             newHead.setNextNode(this.head);
             this.head = newHead;
         }
+    };
+
+    printList(){
+        let current = this.head;
+
+        // if this.head = null we return null
+        if(!current){
+            console.log(current);
+            return
+        };
+
+        // output variable who will store the data of the list
+        let output = '<Head>\n';
+        // traverse recursively the list until there is no next node in the list
+        while(current !== null){
+            output += current.data + '\n';
+            current = current.getNextNode();
+        };
+
+        output += '<Tail>';
+        console.log(output)
     }
 };
 
 const Farm = new SinglyLinkedList();
 
-console.log(Farm)
+Farm.printList();
 
 Farm.addToHead('cow');
 
 Farm.addToHead('Farmer');
 
-console.log(Farm)
+Farm.printList();
